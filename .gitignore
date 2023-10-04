@@ -25,5 +25,5 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
-.idea
 .DS_store
+/.idea/
