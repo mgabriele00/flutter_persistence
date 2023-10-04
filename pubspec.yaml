@@ -1,0 +1,21 @@
+name: flutter_persistence
+description: A Flutter library for efficient data persistence using Hive as a local storage solution. Stream and future-based operations are supported, making it easy to store and retrieve various data types in your Flutter applications.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.1.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+
+flutter:
