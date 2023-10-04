@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../flutter_persistence.dart';
@@ -27,13 +28,14 @@ abstract class FlutterPersistence {
   /// [key] is the unique identifier for the data.
   /// [stream] is the source stream to listen for updates.
   /// [boxName] is an optional parameter that allows you to specify a custom box name.
+  /// [waitForConnection] is an optional parameter that, if set to true, will wait for an internet connection before streaming data.
   ///
   /// Yields a [FlutterPersistenceResponse] with the initial data, and subsequently
   /// yields updated data as it becomes available.
   ///
   /// Throws [NotAllowedTypeException] if the data type is not supported.
   static Stream<FlutterPersistenceResponse<T>> stream<T>(
-      {required String key, required Stream<T> stream, String? boxName}) async* {
+      {required String key, required Stream<T> stream, String? boxName, bool waitForConnection = false}) async* {
     _checkValidType<T>();
 
     final Box box = _getHiveBox(boxName);
@@ -46,7 +48,10 @@ abstract class FlutterPersistence {
             ? FlutterPersistenceResponseType.waiting
             : FlutterPersistenceResponseType.cached);
 
-    //TODO: if online
+    if (waitForConnection) {
+      await _waitForConnection();
+    }
+
     await for (var changes in stream) {
       await _writeData(key, changes, box);
       yield FlutterPersistenceResponse(response: changes, type: FlutterPersistenceResponseType.updated);
@@ -58,13 +63,14 @@ abstract class FlutterPersistence {
   /// [key] is the unique identifier for the data.
   /// [future] is the future that provides the updated data.
   /// [boxName] is an optional parameter that allows you to specify a custom box name.
+  /// [waitForConnection] is an optional parameter that, if set to true, will wait for an internet connection before fetching data.
   ///
   /// Yields a [FlutterPersistenceResponse] with the initial data and subsequently
   /// the updated data after the future completes.
   ///
   /// Throws [NotAllowedTypeException] if the data type is not supported.
   static Stream<FlutterPersistenceResponse<T>> future<T>(
-      {required String key, required Future<T> future, String? boxName}) async* {
+      {required String key, required Future<T> future, String? boxName, bool waitForConnection = false}) async* {
     _checkValidType<T>();
 
     final Box box = _getHiveBox(boxName);
@@ -77,7 +83,10 @@ abstract class FlutterPersistence {
             ? FlutterPersistenceResponseType.waiting
             : FlutterPersistenceResponseType.cached);
 
-    //TODO: if online
+    if (waitForConnection) {
+      await _waitForConnection();
+    }
+
     T changes = await future;
     await _writeData(key, changes, box);
     yield FlutterPersistenceResponse(response: changes, type: FlutterPersistenceResponseType.updated);
@@ -130,6 +139,18 @@ abstract class FlutterPersistence {
   }
 
   // Private methods (not intended for external use):
+
+  /// Check for connection and wait if there is not connection
+  static Future<void> _waitForConnection() async {
+    while(true){
+      bool isConnected = (await Connectivity().checkConnectivity()) != ConnectivityResult.none;
+      if(isConnected){
+        break;
+      }
+      print("waiting for internet");
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  }
 
   /// Writes data to a specified key in a Hive box.
   static Future<void> _writeData<T>(String key, T data, Box box) async {
