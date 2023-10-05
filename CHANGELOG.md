@@ -2,7 +2,11 @@
 
 All notable changes to the "Flutter Persistence" project will be documented in this file.
 
-## [0.0.1] - 2023-10-15
+## [0.0.2] - 2023-10-5
+### Fixed
+- Minor bug fixes and improvements.
+
+## [0.0.1] - 2023-10-4
 ### Added
 - Initial release of the Flutter Persistence library.
 - Support for data streaming and future-based operations.
