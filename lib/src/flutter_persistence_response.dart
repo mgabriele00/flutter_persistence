@@ -1,3 +1,5 @@
+part of 'package:flutter_persistence/flutter_persistence.dart';
+
 /// Enumeration representing possible response types for the [FlutterPersistenceResponse] class.
 enum FlutterPersistenceResponseType {
   /// Indicates that the response has been cached.

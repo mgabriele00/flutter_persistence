@@ -1,7 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-import '../flutter_persistence.dart';
+part of 'package:flutter_persistence/flutter_persistence.dart';
 
 enum _ValidType {
   mapStringDynamic,
