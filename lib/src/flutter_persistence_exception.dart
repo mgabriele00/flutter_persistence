@@ -1,5 +1,3 @@
-part of 'package:flutter_persistence/flutter_persistence.dart';
-
 /// Base exception class for all exceptions related to Flutter Persistence.
 class FlutterPersistentException implements Exception {
   /// A message describing the exception.

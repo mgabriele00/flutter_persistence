@@ -16,6 +16,7 @@ Flutter Persistence supports the following data types:
 
 - `Map<String, dynamic>`
 - `Map<dynamic, dynamic>`
+- `List<Map<String, dynamic>>`
 - `List<dynamic>`
 - `List<int>`
 - `List<double>`
@@ -36,13 +37,15 @@ You can stream data and persist it using Flutter Persistence. For example:
 final persistedStream = FlutterPersistence.stream(key: "myStreamKey", stream: myStream);  
 ```  
 
+**Note:** For supabase is recommended to set waitForConnection = true.
+
 ### Future-Based Operations
 
 You can also work with future-based operations. For example:
 
 ```dart  
 final cachedFuture = FlutterPersistence.future(key: "myFutureKey", stream: myFuture);  
-```  
+```
 
 ## Exception Handling
 
