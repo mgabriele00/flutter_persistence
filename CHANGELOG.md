@@ -2,6 +2,10 @@
 
 All notable changes to the "Flutter Persistence" project will be documented in this file.
 
+## [0.0.3] - 2023-10-5
+### Fixed
+- Minor bug fixes and improvements.
+
 ## [0.0.2] - 2023-10-5
 ### Fixed
 - Minor bug fixes and improvements.
