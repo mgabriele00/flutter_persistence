@@ -1,6 +1,6 @@
 name: flutter_persistence
 description: A Flutter library for efficient data persistence using Hive as a local storage solution.
-version: 0.0.3
+version: 0.0.4
 repository: https://github.com/mgabriele00/flutter_persistence
 
 environment:
