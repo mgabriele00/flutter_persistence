@@ -2,6 +2,10 @@
 
 All notable changes to the "Flutter Persistence" project will be documented in this file.
 
+## [0.0.6] - 2023-10-5
+### Changed
+- Updated example.
+
 ## [0.0.5] - 2023-10-5
 ### Changed
 - Updated readme.
