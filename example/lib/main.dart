@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
     // Generate the fake stream and persist it using Flutter Persistence.
     final myStream = buildFakeStream();
     final persistedStream =
-    FlutterPersistence.stream(key: "fakeStream", stream: myStream);
+        FlutterPersistence.stream(key: "fakeStream", stream: myStream);
 
     return Scaffold(
       appBar: AppBar(

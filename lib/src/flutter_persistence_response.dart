@@ -26,7 +26,8 @@ class FlutterPersistenceResponse<T> {
   ///
   /// [response] contains the value of the returned data.
   /// [type] specifies the response type.
-  const FlutterPersistenceResponse({required this.response, required this.type});
+  const FlutterPersistenceResponse(
+      {required this.response, required this.type});
 
   /// Returns a string representation of the [FlutterPersistenceResponse] object.
   ///

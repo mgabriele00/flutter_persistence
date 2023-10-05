@@ -8,6 +8,7 @@ enum _ValidType {
   listMapStringDynamic,
   otherValidData,
 }
+
 /// An abstract class providing utility methods for persisting and retrieving data
 /// using Hive as a local storage solution in Flutter applications.
 abstract class FlutterPersistence {
@@ -35,7 +36,10 @@ abstract class FlutterPersistence {
   ///
   /// Throws [NotAllowedTypeException] if the data type is not supported.
   static Stream<FlutterPersistenceResponse<T>> stream<T>(
-      {required String key, required Stream<T> stream, String? boxName, bool waitForConnection = false}) async* {
+      {required String key,
+      required Stream<T> stream,
+      String? boxName,
+      bool waitForConnection = false}) async* {
     _checkValidType<T>();
 
     final Box box = _getHiveBox(boxName);
@@ -54,7 +58,8 @@ abstract class FlutterPersistence {
 
     await for (var changes in stream) {
       await _writeData(key, changes, box);
-      yield FlutterPersistenceResponse(response: changes, type: FlutterPersistenceResponseType.updated);
+      yield FlutterPersistenceResponse(
+          response: changes, type: FlutterPersistenceResponseType.updated);
     }
   }
 
@@ -70,7 +75,10 @@ abstract class FlutterPersistence {
   ///
   /// Throws [NotAllowedTypeException] if the data type is not supported.
   static Stream<FlutterPersistenceResponse<T>> future<T>(
-      {required String key, required Future<T> future, String? boxName, bool waitForConnection = false}) async* {
+      {required String key,
+      required Future<T> future,
+      String? boxName,
+      bool waitForConnection = false}) async* {
     _checkValidType<T>();
 
     final Box box = _getHiveBox(boxName);
@@ -89,7 +97,8 @@ abstract class FlutterPersistence {
 
     T changes = await future;
     await _writeData(key, changes, box);
-    yield FlutterPersistenceResponse(response: changes, type: FlutterPersistenceResponseType.updated);
+    yield FlutterPersistenceResponse(
+        response: changes, type: FlutterPersistenceResponseType.updated);
   }
 
   /// Clears all data stored by Hive.
@@ -142,9 +151,10 @@ abstract class FlutterPersistence {
 
   /// Check for connection and wait if there is not connection
   static Future<void> _waitForConnection() async {
-    while(true){
-      bool isConnected = (await Connectivity().checkConnectivity()) != ConnectivityResult.none;
-      if(isConnected){
+    while (true) {
+      bool isConnected =
+          (await Connectivity().checkConnectivity()) != ConnectivityResult.none;
+      if (isConnected) {
         break;
       }
       print("waiting for internet");
@@ -210,7 +220,9 @@ abstract class FlutterPersistence {
       if (validType == _ValidType.mapStringDynamic) {
         return Map<String, dynamic>.from(box.get(key) as Map) as T;
       } else if (validType == _ValidType.listMapStringDynamic) {
-        return (box.get(key) as List<dynamic>).map((map) => Map<String, dynamic>.from(map)).toList() as T;
+        return (box.get(key) as List<dynamic>)
+            .map((map) => Map<String, dynamic>.from(map))
+            .toList() as T;
       } else if (validType == _ValidType.otherValidData) {
         return box.get(key) as T;
       } else {

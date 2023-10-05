@@ -16,13 +16,17 @@ class FlutterPersistentException implements Exception {
 /// Exception thrown when an invalid data type is encountered in Flutter Persistence.
 class NotAllowedTypeException extends FlutterPersistentException {
   /// Creates an instance of [NotAllowedTypeException].
-  NotAllowedTypeException() : super('Not Allowed Type\nAllowed types are: Map<String, dynamic>, Map<dynamic, dynamic>, List<dynamic>, List<int>, List<double>, List<String>, int, double, String\nPS: Also dynamic data must be of an allowed type');
+  NotAllowedTypeException()
+      : super(
+            'Not Allowed Type\nAllowed types are: Map<String, dynamic>, Map<dynamic, dynamic>, List<dynamic>, List<int>, List<double>, List<String>, int, double, String\nPS: Also dynamic data must be of an allowed type');
 }
 
 /// Exception thrown when an invalid dynamic data type is encountered in Flutter Persistence.
 class NotAllowedDynamicTypeException extends FlutterPersistentException {
   /// Creates an instance of [NotAllowedDynamicTypeException].
-  NotAllowedDynamicTypeException() : super('Not Allowed Dynamic Type\ndynamic data must be one of the following: Map<String, dynamic>, Map<dynamic, dynamic>, List<dynamic>, List<int>, List<double>, List<String>, int, double, String');
+  NotAllowedDynamicTypeException()
+      : super(
+            'Not Allowed Dynamic Type\ndynamic data must be one of the following: Map<String, dynamic>, Map<dynamic, dynamic>, List<dynamic>, List<int>, List<double>, List<String>, int, double, String');
 }
 
 /// Exception thrown when an operation is performed without initializing Flutter Persistence.
@@ -32,7 +36,8 @@ class NotInitializedException extends FlutterPersistentException {
 
   /// Creates an instance of [NotInitializedException] with an optional [boxName].
   NotInitializedException(this.boxName)
-      : super('Did you forget to call FlutterPersistence.init(${boxName ?? ""})');
+      : super(
+            'Did you forget to call FlutterPersistence.init(${boxName ?? ""})');
 }
 
 /// Exception thrown when a key is not found in the cache.
