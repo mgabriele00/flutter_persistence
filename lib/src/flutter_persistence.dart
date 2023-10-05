@@ -157,7 +157,6 @@ abstract class FlutterPersistence {
       if (isConnected) {
         break;
       }
-      print("waiting for internet");
       await Future.delayed(const Duration(seconds: 1));
     }
   }
