@@ -2,6 +2,10 @@
 
 All notable changes to the "Flutter Persistence" project will be documented in this file.
 
+## [0.0.10] - 2023-10-6
+### Changed
+- Downgraded min dart sdk version.
+
 ## [0.0.9] - 2023-10-6
 ### Fixed
 - Minor bug fixes and improvements.
